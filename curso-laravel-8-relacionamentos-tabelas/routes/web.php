@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\{
+    User,
+    Preference
+};
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +20,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/one-to-one', function(){
+    $user = User::first();
+
+    $data = [
+        'background_color' => '#000',
+
+    ];
+    if($user->preference){
+        $user->preference->update($data);
+    }else{
+        $user->preference()->create($data);
+    }
+   
+
+    $user->refresh();
+
+    dd($user->preference);
 });

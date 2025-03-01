@@ -5,4 +5,5 @@ namespace App;
 class Orcamento
 {
     public float $valor;
+    public int $quantidadeItens;
 }
